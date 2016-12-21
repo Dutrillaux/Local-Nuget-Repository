@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LocalNugetManager" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LastVersionCheck" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2016-01-01</Value>
+    </Setting>
+    <Setting Name="FirstRun" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RemoteVersionPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\fr-par-fs02\DEV\COMMUN\Shared\LocalNugetManager\LocalNugetManager_versions.txt</Value>
+    </Setting>
+    <Setting Name="RemoteVsixPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\fr-par-fs02\DEV\COMMUN\Shared\LocalNugetManager\LocalNugetManager.vsix</Value>
+    </Setting>
+    <Setting Name="RemoteVsixPath_Beta" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\fr-par-fs02\DEV\COMMUN\Shared\LocalNugetManager\LocalNugetManager_beta.vsix</Value>
+    </Setting>
+    <Setting Name="BetaChannelUpdate" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LocalFolderForRepository" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\NugetLocal</Value>
+    </Setting>
+    <Setting Name="DelayBetweenSynchronizationInMinute" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="AutoSynchronize" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
