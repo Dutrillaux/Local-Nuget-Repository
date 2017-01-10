@@ -3,7 +3,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
                  xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="LocalNugetManager.9c3b2f8a-e10c-4924-82ca-c0e7ff151000" Version="1.0.4"
+    <Identity Id="LocalNugetManager.9c3b2f8a-e10c-4924-82ca-c0e7ff151000" Version="1.0.5"
               Language="en-US" Publisher="Laurent Dutrillaux" />
     <DisplayName>LocalNugetManager</DisplayName>
     <Description xml:space="preserve">Create a local nuget cache (the default cahe nuget is used only for nuget.org, not the nuget Betclic from shared repository) </Description>
