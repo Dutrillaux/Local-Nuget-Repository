@@ -22,7 +22,7 @@ namespace LocalNugetManager.Business
                 var folderSource = GetSolutionDirectory();
                 if (string.IsNullOrEmpty(folderSource)) return;
 
-                CleanUnversionnedNubetPackages(_destinationFolder, true);
+                CleanNonVersionnedNubetPackages(_destinationFolder, true);
                 var alreadyStoredPackages = GetPackagesFromCurrentPath(_destinationFolder);
                 var newPackages = GetPackagesFromSolutionPath(folderSource);
 
@@ -51,9 +51,7 @@ namespace LocalNugetManager.Business
         public IEnumerable<NugetPackage> GetPackagesNeededToBeCopied(List<NugetPackage> alreadyStoredPackages,
             List<NugetPackage> newPackages)
         {
-            var result =
-                newPackages.Where(
-                    x => HasNugetfolderVersionNumber(x.FullPath) && alreadyStoredPackages.All(y => y.Name != x.Name));
+            var result = newPackages.Where(x => (HasNugetfolderVersionNumber(x.FullPath) || IsBeta(x.FullPath)) && alreadyStoredPackages.All(y => y.Name != x.Name));
             return result;
         }
 
@@ -129,9 +127,8 @@ namespace LocalNugetManager.Business
 
             try
             {
-                var segments = folder.Replace(@"\", "").Split('.');
-                if (segments.Length <= 0) return false;
-                var lastSegment = segments[segments.Length - 1];
+                string lastSegment;
+                if (!GetLastSegmentValue(folder, out lastSegment)) return false;
                 int number;
                 return int.TryParse(lastSegment, out number);
             }
@@ -142,7 +139,37 @@ namespace LocalNugetManager.Business
             return false;
         }
 
-        private void CleanUnversionnedNubetPackages(string path, bool destinationPath)
+        public bool IsBeta(string folder)
+        {
+            if (string.IsNullOrEmpty(folder)) return false;
+
+            try
+            {
+                string lastSegment;
+                if (!GetLastSegmentValue(folder, out lastSegment)) return false;
+
+                return lastSegment.ToLowerInvariant().Contains("beta");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+            return false;
+        }
+
+        private static bool GetLastSegmentValue(string folder, out string lastSegment)
+        {
+            lastSegment = string.Empty;
+
+            var segments = folder.Replace(@"\", "").Split('.');
+
+            if (segments.Length <= 0) return false;
+
+            lastSegment = segments[segments.Length - 1];
+            return true;
+        }
+
+        private void CleanNonVersionnedNubetPackages(string path, bool destinationPath)
         {
             if (!Directory.Exists(path)) return;
 

@@ -11,6 +11,7 @@ namespace LocalNugetManager.Tests
         private const string PathNugetWithVersion = @"C:\NugetLocal\Global.Mobile.Api.Auth.16.52.383921";
         private const string PathNugetWithVersion2 = @"C:\NugetLocal\Polly.4.2.0";
         private const string PathNugetWithVersion3 = @"C:\NugetLocal\modernhttpclient.2.4.2";
+        private const string PathNugetWithVersionBeta = @"C:\NugetLocal\Cirrious.MvvmCross.Droid.Support.V4.4.0.0-beta6";
 
         private const string PathNubet = @"C:\NugetLocal\Global.Mobile.Api.Auth";
 
@@ -57,6 +58,28 @@ namespace LocalNugetManager.Tests
             
             Assert.IsTrue(result.Count() == 1);
             Assert.IsTrue(result.First(x => x.FullPath == PathNugetWithVersion3) != null);
+        }
+
+        [TestMethod]
+        public void Validate_Number_Of_NugetPackages_With_Beta_To_Be_Copied()
+        {
+            var alreadyStoredPackages = new List<NugetPackage>
+            {
+                new NugetPackage(PathNugetWithVersion),
+                new NugetPackage(PathNugetWithVersion2)
+            };
+            var newPackages = new List<NugetPackage>
+            {
+                new NugetPackage(PathNugetWithVersion2),
+                new NugetPackage(PathNugetWithVersionBeta),
+                new NugetPackage(PathNubet)
+            };
+
+            var synchronizeLocalRepository = new SynchronizeLocalRepository("");
+            var result = synchronizeLocalRepository.GetPackagesNeededToBeCopied(alreadyStoredPackages, newPackages).ToList();
+
+            Assert.IsTrue(result.Count() == 1);
+            Assert.IsTrue(result.First(x => x.FullPath == PathNugetWithVersionBeta) != null);
         }
     }
 }
